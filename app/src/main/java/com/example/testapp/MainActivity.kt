@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.testapp.model.Product
 import com.example.testapp.repository.Repository
 import com.example.testapp.ui.theme.TestAppTheme
 
@@ -28,11 +29,21 @@ class MainActivity: ComponentActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.getProduct()
 
-        viewModel.myResponse.observe(this, Observer { response ->
-            Log.d("Response", response.title)
-            Log.d("Response", response.description)
-
+        viewModel.myResponse.observe(this, Observer {response ->
+            Log.d("Response: ", response.productList?.size.toString())
         })
+
+        //println(viewModel.myResponse.value?.size)
+
+        /*viewModel.myResponse.observe(this, Observer {
+                response ->
+
+            for (item in response) {
+                Log.d("Response", item.title)
+                Log.d("Response", item.description)
+            }
+
+        })*/
     }
 }
 
