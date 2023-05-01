@@ -11,8 +11,3 @@ class MainViewModelFactory(
         return MainViewModel(repository) as T
     }
 }
-
-/*override fun <T : ViewModel?> MainViewModelFactory.create(modelClass: Class<T>): T {
-    return MainViewModel(repository) as T
-}
-*/
