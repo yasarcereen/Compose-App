@@ -16,9 +16,11 @@ fun HomeScreen(myViewModel: MainViewModel) {
     myViewModel.getProduct()
     val myData by myViewModel.myResponse.observeAsState()
 
-    Scaffold(bottomBar = { BottomNavigation() }) {padding ->
+    Scaffold(bottomBar = { BottomNavigation() }) { padding ->
         Modifier.padding(1.dp)
 
         myData?.let { ProductBox(myData = it) }
     }
 }
+
+//    topBar = { myData?.let { FilterBar(it.products) } }

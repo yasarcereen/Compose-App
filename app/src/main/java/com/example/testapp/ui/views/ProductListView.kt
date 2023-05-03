@@ -1,6 +1,9 @@
 package com.example.testapp.ui.views
 
+import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,6 +33,7 @@ import com.example.testapp.ui.theme.TestAppTheme
 import com.guru.fontawesomecomposelib.FaIcon
 import com.guru.fontawesomecomposelib.FaIcons
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProductBox(myData: ResponseStorage) {
     val products: List<Product> = myData?.products ?: listOf()
@@ -37,6 +42,9 @@ fun ProductBox(myData: ResponseStorage) {
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(16.dp)
     ) {
+        stickyHeader { 
+            FilterBar(products = products)
+        }
 
         items(products) { product ->
             SingleProduct(product)
@@ -49,7 +57,13 @@ fun SingleProduct(product: Product) {
     Surface(shape = MaterialTheme.shapes.large,
         shadowElevation = 2.dp,
         modifier = Modifier.padding(5.dp)) {
-        Column(modifier = Modifier.padding(all = 10.dp)) {
+        val context = LocalContext.current
+        Column(modifier = Modifier.padding(all = 10.dp)
+            .clickable {
+                Toast
+                    .makeText(context," Clickable Column Example", Toast.LENGTH_SHORT)
+                    .show()
+            }) {
             Surface(
                 shape = MaterialTheme.shapes.medium,
                 shadowElevation = 1.5.dp
